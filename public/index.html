@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pembayaran QRIS</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Pembayaran via QRIS</h1>
+    
+    <div class="qris-box">
+      <img src="assets/qris.png" alt="QRIS Code" />
+      <p>Scan QR di atas untuk melakukan pembayaran</p>
+    </div>
+
+    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/upload">
+      <input type="text" name="name" placeholder="Nama Anda" required />
+      <input type="file" name="bukti" accept="image/*" required onchange="previewImage(event)" />
+      <img id="preview" style="display:none; max-width: 90%; margin-top: 10px; border-radius: 10px; border: 2px dashed #90e0ef;" />
+      <button class="confirm-button">
+        <i class="fa-solid fa-upload"></i> Upload Bukti Pembayaran
+      </button>
+    </form>
+
+    <div id="status"></div>
+
+    <!-- ✅ Hasil upload -->
+    <div id="result" style="display:none; margin-top: 20px;">
+      <h3>✅ Bukti berhasil dikirim!</h3>
+      <img id="uploadedImg" src="" alt="Hasil Upload" style="width: 220px; margin-top: 10px; border-radius: 10px; border: 2px solid #27ae60;">
+      <br />
+      <a id="downloadBtn" href="#" download class="confirm-button" style="margin-top: 10px; display: inline-block;">
+        📥 Download Bukti
+      </a>
+    </div>
+
+    <footer>
+      &copy; 2025 <strong>qris-payment</strong> — Built by 
+      <a href="https://wa.me/6288223583558" target="_blank">Hidayatul Atfal</a>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const statusDiv = document.getElementById('status');
+    const resultDiv = document.getElementById('result');
+    const uploadedImg = document.getElementById('uploadedImg');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const preview = document.getElementById('preview');
+
+    // Preview gambar sebelum upload
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          preview.src = reader.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Submit form dengan fetch
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      statusDiv.textContent = "⏳ Mengirim...";
+
+      try {
+        const res = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        statusDiv.textContent = data.message;
+
+        if (data.success && data.filename) {
+          form.reset();
+          preview.style.display = 'none';
+          const filePath = `/uploads/${data.filename}`;
+          uploadedImg.src = filePath;
+          downloadBtn.href = filePath;
+          resultDiv.style.display = 'block';
+        } else {
+          resultDiv.style.display = 'none';
+        }
+      } catch (err) {
+        statusDiv.textContent = "❌ Gagal mengirim.";
+      }
+    });
+  </script>
+</body>
+</html>

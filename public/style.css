@@ -1,0 +1,133 @@
+/* === Reset & Body === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d1b2a;
+  color: #e0e1dd;
+}
+
+/* === Container Utama === */
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #1b263b;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* === Judul === */
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+/* === Gambar QRIS === */
+.qris-box img {
+  width: 250px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 4px solid #415a77;
+}
+
+.qris-box p {
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* === Form === */
+form {
+  margin-top: 25px;
+}
+
+input[type="text"],
+input[type="file"] {
+  width: 90%;
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #333;
+  display: block;
+  font-size: 15px;
+}
+
+/* === Tombol === */
+button,
+.confirm-button {
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+  color: #fff;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 95%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover,
+.confirm-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #1b4965, #5fa8d3);
+}
+
+/* === Status Upload === */
+#status {
+  margin-top: 15px;
+  font-weight: 500;
+  color: #90e0ef;
+}
+
+/* === Preview Gambar Sebelum Upload === */
+#preview {
+  max-width: 90%;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 2px dashed #90e0ef;
+  display: block;
+}
+
+/* === Gambar Hasil Upload === */
+#uploadedImg {
+  width: 220px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 2px solid #27ae60;
+}
+
+/* === Area Hasil Upload === */
+#result {
+  margin-top: 20px;
+  display: none;
+}
+
+#result h3 {
+  color: #38b000;
+  font-size: 18px;
+}
+
+/* === Footer === */
+footer {
+  margin-top: 50px;
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+}
+
+footer a {
+  color: #90e0ef;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
